@@ -1,0 +1,27 @@
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 25
+    username: madarat87@gmail.com
+    password: ???
+    properties:
+      mail:
+        transport:
+          protocol: smtp
+        smtp:
+          starttls:
+            enable: true
+          EnableSSL:
+            enabled: true
+          auth: true
+          connectiontimeout: 15000
+          timeout: 15000
+          writetimeout: 15000
+    protocol: smtp
+  rabbitmq:
+    host: rabbitmq
+email:
+  message:
+    from: madarat87@gmail.com
+server:
+  port: 8083

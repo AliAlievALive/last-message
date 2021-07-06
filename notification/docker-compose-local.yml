@@ -1,0 +1,21 @@
+version: '3.7'
+services:
+  notification:
+    networks:
+      - last-message-backend
+    container_name: notification
+    image: notification
+    build: .
+    ports:
+      - 8083:8083
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq
+    networks:
+      - last-message-backend
+    ports:
+      - 5672:5672
+      - 15672:15672
+networks:
+  last-message-backend:
+    name: last-message-backend

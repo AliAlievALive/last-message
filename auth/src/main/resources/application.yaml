@@ -1,0 +1,15 @@
+jwt:
+  secret: WLpus95zyCbvZxnxAVi55PvcWXQIIJyP
+  expiration:
+    hours: 8
+spring:
+  datasource:
+    url: jdbc:postgresql://auth_db:5432/authdb
+    username: auth
+    password: auth
+  liquibase:
+    change-log: classpath:db/database_changelog.xml
+  jpa:
+    show-sql: true
+server:
+  port: 8082

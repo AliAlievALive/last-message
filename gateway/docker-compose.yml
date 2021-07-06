@@ -1,0 +1,15 @@
+version: '3.7'
+services:
+  gateway:
+    networks:
+      - last-message-backend
+    image: gateway
+    container_name: gateway
+    build: .
+    ports:
+      - 80:80
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+networks:
+  last-message-backend:
+    name: last-message-backend

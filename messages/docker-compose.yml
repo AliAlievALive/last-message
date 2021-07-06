@@ -1,0 +1,30 @@
+version: '3.7'
+services:
+  message:
+    networks:
+      - last-message-backend
+    container_name: message
+    image: message
+    build: .
+    depends_on:
+      - message_db
+      - redis
+  message_db:
+    container_name: message-db
+    image: postgres
+    restart: on-failure
+    networks:
+      - last-message-backend
+    environment:
+      POSTGRES_DB: messagedb
+      POSTGRES_USER: message
+      POSTGRES_PASSWORD: message
+  redis:
+    container_name: redis
+    image: "redis:alpine"
+    networks:
+      - last-message-backend
+
+networks:
+  last-message-backend:
+    name: last-message-backend
