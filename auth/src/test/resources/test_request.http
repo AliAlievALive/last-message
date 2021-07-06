@@ -1,0 +1,135 @@
+###
+//регистрация
+POST http://localhost/api/v1/auth/users
+Content-Type: application/json
+
+{
+  "firstName": "ali",
+  "lastName": "ali",
+  "login": "ali@ali.ru",
+  "middleName": "ali",
+  "password": "ali"
+}
+
+###
+//Вход в систему
+POST http://localhost:8082/api/v1/auth
+Content-Type: application/json
+
+{
+  "login": "admin@admin.ru",
+  "password": "admin"
+}
+
+> {%
+client.global.set("auth", response.body.token)
+ %}
+
+###
+//Проверка токена
+GET http://localhost:8080/api/v1/auth
+Authorization: Bearer {{auth}}
+
+###
+//Получение пользователей
+GET http://localhost:8080/api/v1/auth/users
+Authorization: Bearer {{auth}}
+
+###
+// Пользователю не доступно обновление пользователей
+PUT http://localhost:8080/api/v1/auth/users
+Content-Type: application/json
+Authorization: Bearer {{auth}}
+
+{
+  "id": "65969286-5250-4f52-a4a9-ef82c360c638",
+  "firstName": "ТесТ",
+  "lastName": "Тестов",
+  "login": "???",
+  "middleName": "Тестович",
+  "password": "???"
+}
+
+###
+// Пользователю доступно обновление пароля
+PATCH http://localhost:8080/api/v1/auth/users/128134c7-c682-48c2-8cd6-1b3ca99af61b/password
+Content-Type: application/json
+Authorization: Bearer {{auth}}
+
+"???"
+
+###
+//Вход в систему
+POST http://localhost:8080/api/v1/auth
+Content-Type: application/json
+
+{
+  "login": "???",
+  "password": "???"
+}
+
+> {%
+client.global.set("auth", response.body.token)
+ %}
+
+###
+//Вход в систему под админом
+POST http://localhost:8080/api/v1/auth
+Content-Type: application/json
+
+{
+  "login": "???",
+  "password": "???"
+}
+
+> {%
+client.global.set("auth_admin", response.body.token)
+ %}
+
+###
+// Пользователю доступно обновление пароля
+PATCH http://localhost:8080/api/v1/auth/users/128134c7-c682-48c2-8cd6-1b3ca99af61b/password
+Content-Type: application/json
+Authorization: Bearer {{auth_admin}}
+
+"???"
+
+###
+//Вход в систему под админом
+POST http://localhost:8080/api/v1/auth
+Content-Type: application/json
+
+{
+  "login": "admin",
+  "password": "admin"
+}
+
+> {%
+client.global.set("auth_admin", response.body.token)
+ %}
+
+###
+//Проверка токена админа
+GET http://localhost:8080/api/v1/auth
+Authorization: Bearer {{auth_admin}}
+
+
+###
+//Получение пользователей
+GET http://localhost:8080/api/v1/auth/users
+Authorization: Bearer {{auth_admin}}
+
+###
+// Обновление пользователя админом
+PUT http://localhost:8080/api/v1/auth/users
+Content-Type: application/json
+Authorization: Bearer {{auth_admin}}
+
+{
+  "id": "4d5ab775-570f-4785-8089-dbac67d97696",
+  "firstName": "ТесТ",
+  "lastName": "Тестов",
+  "middleName": "Тестович",
+  "login": "???",
+  "password": "???"
+}
