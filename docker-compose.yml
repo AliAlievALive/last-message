@@ -1,0 +1,69 @@
+version: '3.7'
+services:
+  messages:
+    networks:
+      - last-message-backend
+    container_name: messages
+    image: messages
+    build: ./messages
+    depends_on:
+      - message_db
+      - redis
+  message_db:
+    container_name: message-db
+    image: postgres
+    restart: on-failure
+    networks:
+      - last-message-backend
+    environment:
+      POSTGRES_DB: messagedb
+      POSTGRES_USER: message
+      POSTGRES_PASSWORD: message
+  redis:
+    container_name: redis
+    image: "redis:alpine"
+    networks:
+      - last-message-backend
+  auth:
+    networks:
+      - last-message-backend
+    container_name: auth
+    image: auth
+    build: ./auth
+    depends_on:
+      - auth_db
+  auth_db:
+    container_name: auth-db
+    image: postgres
+    restart: on-failure
+    networks:
+      - last-message-backend
+    environment:
+      POSTGRES_DB: authdb
+      POSTGRES_USER: auth
+      POSTGRES_PASSWORD: auth
+  gateway:
+    networks:
+      - last-message-backend
+    image: gateway
+    container_name: gateway
+    build: ./gateway
+    ports:
+      - 8080:80
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+  notification:
+    networks:
+      - last-message-backend
+    container_name: notification
+    image: notification
+    build: ./notification
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq
+    networks:
+      - last-message-backend
+
+networks:
+  last-message-backend:
+    name: last-message-backend
