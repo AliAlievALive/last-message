@@ -25,5 +25,4 @@ public class Message implements Serializable {
     @NotNull
     @NotBlank
     private String text;
-
 }

@@ -12,7 +12,7 @@ import java.util.UUID;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/api/auth")
 public interface AuthApi {
 
     @GetMapping(value = "/users", produces = APPLICATION_JSON_VALUE)

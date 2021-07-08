@@ -1,6 +1,6 @@
 ###
 //регистрация
-POST http://localhost/api/v1/auth/users
+POST http://localhost/api/auth/users
 Content-Type: application/json
 
 {
@@ -13,7 +13,7 @@ Content-Type: application/json
 
 ###
 //Вход в систему
-POST http://localhost:8082/api/v1/auth
+POST http://localhost:8082/api/auth
 Content-Type: application/json
 
 {
@@ -27,17 +27,17 @@ client.global.set("auth", response.body.token)
 
 ###
 //Проверка токена
-GET http://localhost:8080/api/v1/auth
+GET http://localhost:8080/api/auth
 Authorization: Bearer {{auth}}
 
 ###
 //Получение пользователей
-GET http://localhost:8080/api/v1/auth/users
+GET http://localhost:8080/api/auth/users
 Authorization: Bearer {{auth}}
 
 ###
 // Пользователю не доступно обновление пользователей
-PUT http://localhost:8080/api/v1/auth/users
+PUT http://localhost:8080/api/auth/users
 Content-Type: application/json
 Authorization: Bearer {{auth}}
 
@@ -52,7 +52,7 @@ Authorization: Bearer {{auth}}
 
 ###
 // Пользователю доступно обновление пароля
-PATCH http://localhost:8080/api/v1/auth/users/128134c7-c682-48c2-8cd6-1b3ca99af61b/password
+PATCH http://localhost:8080/api/auth/users/128134c7-c682-48c2-8cd6-1b3ca99af61b/password
 Content-Type: application/json
 Authorization: Bearer {{auth}}
 
@@ -60,7 +60,7 @@ Authorization: Bearer {{auth}}
 
 ###
 //Вход в систему
-POST http://localhost:8080/api/v1/auth
+POST http://localhost:8080/api/auth
 Content-Type: application/json
 
 {
@@ -74,7 +74,7 @@ client.global.set("auth", response.body.token)
 
 ###
 //Вход в систему под админом
-POST http://localhost:8080/api/v1/auth
+POST http://localhost:8080/api/auth
 Content-Type: application/json
 
 {
@@ -88,7 +88,7 @@ client.global.set("auth_admin", response.body.token)
 
 ###
 // Пользователю доступно обновление пароля
-PATCH http://localhost:8080/api/v1/auth/users/128134c7-c682-48c2-8cd6-1b3ca99af61b/password
+PATCH http://localhost:8080/api/auth/users/128134c7-c682-48c2-8cd6-1b3ca99af61b/password
 Content-Type: application/json
 Authorization: Bearer {{auth_admin}}
 
@@ -96,7 +96,7 @@ Authorization: Bearer {{auth_admin}}
 
 ###
 //Вход в систему под админом
-POST http://localhost:8080/api/v1/auth
+POST http://localhost:8080/api/auth
 Content-Type: application/json
 
 {
@@ -110,18 +110,18 @@ client.global.set("auth_admin", response.body.token)
 
 ###
 //Проверка токена админа
-GET http://localhost:8080/api/v1/auth
+GET http://localhost:8080/api/auth
 Authorization: Bearer {{auth_admin}}
 
 
 ###
 //Получение пользователей
-GET http://localhost:8080/api/v1/auth/users
+GET http://localhost:8080/api/auth/users
 Authorization: Bearer {{auth_admin}}
 
 ###
 // Обновление пользователя админом
-PUT http://localhost:8080/api/v1/auth/users
+PUT http://localhost:8080/api/auth/users
 Content-Type: application/json
 Authorization: Bearer {{auth_admin}}
 

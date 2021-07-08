@@ -11,7 +11,7 @@ import java.util.UUID;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-@RequestMapping("/api/v1/progress")
+@RequestMapping("/api/progress")
 public interface ProgressApi {
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE)

@@ -2,6 +2,7 @@ package ru.itpark.message.scheduling;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import ru.itpark.message.dto.Progress;
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 
 @Slf4j
 @Component
+@EnableScheduling
 @RequiredArgsConstructor
 public class ScheduledMessageSend {
 
@@ -24,11 +26,11 @@ public class ScheduledMessageSend {
         messageService.getAllMessages()
                 .stream()
                 .filter(message -> message.getProgress().stream()
-                        .noneMatch(progress -> progress.getCreateDate().isEqual(currentDate.minusDays(1))))
+                        .noneMatch(progress -> progress.getCreateDate().plusDays(message.getDaysAfterMustSend()).isBefore(currentDate)))
                 .forEach(message -> progressService.createProgress(Progress.builder()
                         .status(false)
                         .lastMessageId(message.getId())
-                        .createDate(currentDate.minusDays(1))
+                        .createDate(currentDate)
                         .build()));
     }
 }

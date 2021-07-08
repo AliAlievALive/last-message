@@ -1,6 +1,6 @@
 ###
 //Вход в систему
-POST http://localhost:8080/api/v1/auth
+POST http://localhost:8080/api/auth
 Content-Type: application/json
 
 {
@@ -14,23 +14,23 @@ client.global.set("auth", response.body.token)
 
 ###
 //Получаем сообщения
-GET http://localhost:8080/api/v1/messages
+GET http://localhost:8080/api/messages
 Authorization: Bearer {{auth}}
 
 ###
 // Создание сообщений
-POST http://localhost:8080/api/v1/messages
+POST http://localhost:8080/api/messages
 Content-Type: application/json
 Authorization: Bearer {{auth}}
 
 {
-  "description": "test LastMessage",
+  "description": "test last message",
   "isNotify": true,
-  "name": "TEST LastMessage",
+  "name": "TEST last message",
   "notifies": [
     {
       "email": "???",
-      "notificationTime": "16:00",
+      "notificationTime": "08:00",
       "notificationType": "EMAIL"
     }
   ]
@@ -38,53 +38,53 @@ Authorization: Bearer {{auth}}
 
 ###
 // Обновление сообщения
-PUT http://localhost:8080/api/v1/messages
+PUT http://localhost:8080/api/messages
 Content-Type: application/json
 Authorization: Bearer {{auth}}
 
 {
   "id": "babe1f0f-5461-4441-815d-282b69516b78",
-  "name": "TEST LastMessage UPDATE",
+  "name": "TEST last message UPDATE",
   "isNotify": true,
   "notifies": [
     {
       "id": "2370b54e-3377-414b-beca-456accca2191",
       "messageId": "babe1f0f-5461-4441-815d-282b69516b78",
       "notificationType": "EMAIL",
-      "notificationTime": "16:00",
+      "notificationTime": "08:00",
       "email": "???"
     }
   ],
-  "description": "test LastMessage",
+  "description": "test last message",
   "isActive": true,
   "progress": [],
-  "createDate": "25.06.2021"
+  "createDate": "07.07.2021"
 }
 
 ###
 //Получаем сообщения
-GET http://localhost:8080/api/v1/messages
+GET http://localhost:8080/api/messages
 Authorization: Bearer {{auth}}
 
 ###
 // Получение сообщения
-GET http://localhost:8080/api/v1/messages/babe1f0f-5461-4441-815d-282b69516b78
+GET http://localhost:8080/api/messages/babe1f0f-5461-4441-815d-282b69516b78
 Authorization: Bearer {{auth}}
 
 ###
 // Создание сообщения
-POST http://localhost:8080/api/v1/messages
+POST http://localhost:8080/api/messages
 Content-Type: application/json
 Authorization: Bearer {{auth}}
 
 {
-  "description": "test LastMessage",
+  "description": "test last message",
   "isNotify": true,
-  "name": "TEST LastMessage",
+  "name": "TEST last message",
   "notifies": [
     {
       "email": "???",
-      "notificationTime": "16:00",
+      "notificationTime": "08:00",
       "notificationType": "EMAIL"
     }
   ]
@@ -92,39 +92,39 @@ Authorization: Bearer {{auth}}
 
 ###
 //Получаем заведенные сообщения
-GET http://localhost:8080/api/v1/messages
+GET http://localhost:8080/api/messages
 Authorization: Bearer {{auth}}
 
 ###
-DELETE http://localhost:8080/api/v1/messages/693e2c07-2b55-4fb8-b276-10bbf6e7342a
+DELETE http://localhost:8080/api/messages/693e2c07-2b55-4fb8-b276-10bbf6e7342a
 Authorization: Bearer {{auth}}
 
 ###
 //Получаем заведенные сообщения
-GET http://localhost:8080/api/v1/messages
+GET http://localhost:8080/api/messages
 Authorization: Bearer {{auth}}
 
 ###
 // Создание уведомления
-POST http://localhost:8080/api/v1/notifications
+POST http://localhost:8080/api/notifications
 Content-Type: application/json
 Authorization: Bearer {{auth}}
 
 {
   "email": "???",
   "messageId": "babe1f0f-5461-4441-815d-282b69516b78",
-  "notificationTime": "17:30",
+  "notificationTime": "08:00",
   "notificationType": "EMAIL"
 }
 
 ###
 //Получаем сообщения
-GET http://localhost:8080/api/v1/messages
+GET http://localhost:8080/api/messages
 Authorization: Bearer {{auth}}
 
 ###
 // Обновление сообщения
-PUT http://localhost:8080/api/v1/notifications
+PUT http://localhost:8080/api/notifications
 Content-Type: application/json
 Authorization: Bearer {{auth}}
 
@@ -132,28 +132,28 @@ Authorization: Bearer {{auth}}
   "id": "db3672bb-20e1-4865-a1ed-aa4cf2e7517b",
   "email": "???",
   "messageId": "babe1f0f-5461-4441-815d-282b69516b78",
-  "notificationTime": "17:35",
+  "notificationTime": "08:35",
   "notificationType": "EMAIL"
 }
 
 ###
 //Получаем сообщения
-GET http://localhost:8080/api/v1/messages
+GET http://localhost:8080/api/messages
 Authorization: Bearer {{auth}}
 
 ###
 // Удаляем сообщения
-DELETE http://localhost:8080/api/v1/notifications/db3672bb-20e1-4865-a1ed-aa4cf2e7517b
+DELETE http://localhost:8080/api/notifications/db3672bb-20e1-4865-a1ed-aa4cf2e7517b
 Authorization: Bearer {{auth}}
 
 ###
 //Получаем сообщения
-GET http://localhost:8080/api/v1/messages
+GET http://localhost:8080/api/messages
 Authorization: Bearer {{auth}}
 
 ###
 // Создание отметки о прогрессе
-POST http://localhost:8080/api/v1/progress
+POST http://localhost:8080/api/progress
 Content-Type: application/json
 Authorization: Bearer {{auth}}
 
@@ -165,5 +165,5 @@ Authorization: Bearer {{auth}}
 
 ###
 //Получаем сообщения
-GET http://localhost:8080/api/v1/messages
+GET http://localhost:8080/api/messages
 Authorization: Bearer {{auth}}

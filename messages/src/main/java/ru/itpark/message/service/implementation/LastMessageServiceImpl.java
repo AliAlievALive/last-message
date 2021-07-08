@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.itpark.message.dto.LastMessage;
 import ru.itpark.message.dto.LastMessageResponse;
-import ru.itpark.message.dto.MessageForNears;
 import ru.itpark.message.exception.LastMessageException;
 import ru.itpark.message.exception.NotFoundException;
 import ru.itpark.message.mapper.LastMessageMapper;

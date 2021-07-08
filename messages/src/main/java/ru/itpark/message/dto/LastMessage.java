@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,7 +27,11 @@ public class LastMessage implements Serializable {
 
     private List<Notification> notifies;
 
-    private MessageForNears messageForNears;
+    private MessageForClose messageForClose;
+
+    private LocalDate createDate;
+
+    private int daysAfterMustSend;
 
     @JsonIgnore
     private UUID userId;

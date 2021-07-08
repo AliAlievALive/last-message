@@ -13,7 +13,7 @@ import java.util.UUID;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-@RequestMapping("/api/v1/messages")
+@RequestMapping("/api/messages")
 public interface MessageApi {
 
     @GetMapping(produces = APPLICATION_JSON_VALUE)

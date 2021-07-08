@@ -4,8 +4,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,6 +24,9 @@ public class LastMessageEntity extends BaseEntity {
     private List<NotificationEntity> notifies;
 
     private String description;
+
+    @DateTimeFormat(pattern="dd/MM/yyyy")
+    private LocalDate createDate;
 
     @Column(nullable = false)
     private Boolean isActive = true;
