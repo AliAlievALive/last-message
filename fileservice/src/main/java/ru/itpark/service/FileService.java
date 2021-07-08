@@ -12,7 +12,7 @@ import java.util.UUID;
 public interface FileService {
     UUID upload(MultipartFile multipartFile, UUID messageId) throws IOException;
 
-    boolean checkOwner(List<UUID> fileUUID, UUID messageId);
+    boolean checkOwnerMessage(List<UUID> fileUUID, UUID messageId);
 
     List<MessageFile> getAllOwnerFiles(UUID messageId);
 

@@ -79,7 +79,7 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public boolean checkOwner(List<UUID> fileId, UUID messageId) {
+    public boolean checkOwnerMessage(List<UUID> fileId, UUID messageId) {
         return fileRepository.existsByMessageIdAndUuidIn(messageId, fileId);
     }
 

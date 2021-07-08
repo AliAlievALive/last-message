@@ -25,9 +25,9 @@ import java.util.UUID;
 public class InternalFileController {
     private final FileService fileService;
 
-    @GetMapping("/checkOwner")
-    public boolean checkOwner(@RequestParam List<UUID> fileUUID, @RequestParam UUID messageId) {
-        return fileService.checkOwner(fileUUID, messageId);
+    @GetMapping("/checkOwnerMessage")
+    public boolean checkOwnerMessage(@RequestParam List<UUID> fileUUID, @RequestParam UUID messageId) {
+        return fileService.checkOwnerMessage(fileUUID, messageId);
     }
 
     @GetMapping("/getFile")
