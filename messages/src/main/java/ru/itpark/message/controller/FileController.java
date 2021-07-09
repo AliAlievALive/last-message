@@ -1,4 +1,4 @@
-package ru.itpark.controller;
+package ru.itpark.message.controller;
 
 import kotlin.Pair;
 import lombok.RequiredArgsConstructor;
@@ -8,31 +8,32 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ru.itpark.service.FileService;
+import org.springframework.web.multipart.MultipartFile;
+import ru.itpark.message.api.FileApi;
+import ru.itpark.message.service.FileService;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.List;
+import java.io.IOException;
 import java.util.UUID;
 
-@RequestMapping("/internal/files")
-@RequiredArgsConstructor
 @RestController
-public class InternalFileController {
-    private final FileService fileService;
+@RequiredArgsConstructor
+public class FileController implements FileApi {
 
-    @GetMapping("/checkOwner")
-    public boolean checkOwner(@RequestParam List<UUID> fileUUID, @RequestParam UUID messageId) {
-        return fileService.checkOwner(fileUUID, messageId);
+    private final FileService service;
+
+    @Override
+    public UUID create(MultipartFile multipartFile, UUID messageId) throws IOException {
+        return service.create(multipartFile, messageId);
     }
 
-    @GetMapping("/getFile")
-    public ResponseEntity<Resource> getFile(@RequestParam UUID fileUUID) throws FileNotFoundException {
-        Pair<String, File> fileServiceFile = fileService.getFile(fileUUID);
+    @GetMapping(value = "/getFile")
+    public ResponseEntity<Resource> getFile(@RequestParam UUID fileUUID) throws IOException {
+
+        Pair<String, File> fileServiceFile = service.getFile(fileUUID);
         InputStreamResource inputStreamResource = new InputStreamResource(new FileInputStream(fileServiceFile.component2()));
 
         return ResponseEntity.ok()
@@ -40,4 +41,15 @@ public class InternalFileController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileServiceFile.component1() + "\"")
                 .body(inputStreamResource);
     }
+
+    @Override
+    public UUID update(MultipartFile multipartFile) {
+        return service.update(multipartFile);
+    }
+
+    @Override
+    public void delete(UUID messageId) {
+        service.delete(messageId);
+    }
+
 }
