@@ -1,8 +1,6 @@
 version: '3.7'
 services:
   messages:
-    networks:
-      - last-message-backend
     container_name: messages
     image: messages
     build: ./messages
@@ -13,8 +11,6 @@ services:
     container_name: message-db
     image: postgres
     restart: on-failure
-    networks:
-      - last-message-backend
     environment:
       POSTGRES_DB: messagedb
       POSTGRES_USER: message
@@ -22,11 +18,7 @@ services:
   redis:
     container_name: redis
     image: "redis:alpine"
-    networks:
-      - last-message-backend
   auth:
-    networks:
-      - last-message-backend
     container_name: auth
     image: auth
     build: ./auth
@@ -36,15 +28,11 @@ services:
     container_name: auth-db
     image: postgres
     restart: on-failure
-    networks:
-      - last-message-backend
     environment:
       POSTGRES_DB: authdb
       POSTGRES_USER: auth
       POSTGRES_PASSWORD: auth
   gateway:
-    networks:
-      - last-message-backend
     image: gateway
     container_name: gateway
     build: ./gateway
@@ -53,16 +41,12 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
   notification:
-    networks:
-      - last-message-backend
     container_name: notification
     image: notification
     build: ./notification
   rabbitmq:
     image: rabbitmq:3-management-alpine
     container_name: rabbitmq
-    networks:
-      - last-message-backend
 
 networks:
   last-message-backend:

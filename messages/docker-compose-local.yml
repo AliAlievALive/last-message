@@ -1,8 +1,6 @@
 version: '3.7'
 services:
   message:
-    networks:
-      - last-message-backend
     container_name: message
     image: message
     build: .
@@ -14,8 +12,6 @@ services:
     container_name: message-db
     image: postgres
     restart: on-failure
-    networks:
-      - last-message-backend
     ports:
       - 5001:5432
     environment:
@@ -25,8 +21,6 @@ services:
   redis:
     container_name: redis
     image: "redis:alpine"
-    networks:
-      - last-message-backend
     ports:
       - 6379:6379
 
