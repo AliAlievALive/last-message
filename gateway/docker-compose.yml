@@ -1,8 +1,6 @@
 version: '3.7'
 services:
   gateway:
-    networks:
-      - last-message-backend
     image: gateway
     container_name: gateway
     build: .

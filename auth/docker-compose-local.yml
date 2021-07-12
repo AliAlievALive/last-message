@@ -1,8 +1,6 @@
 version: '3.7'
 services:
   auth:
-    networks:
-      - last-message-backend
     container_name: auth
     image: auth
     build: .
@@ -14,8 +12,6 @@ services:
     container_name: auth-db
     image: postgres
     restart: on-failure
-    networks:
-      - last-message-backend
     ports:
       - 5002:5432
     environment:
